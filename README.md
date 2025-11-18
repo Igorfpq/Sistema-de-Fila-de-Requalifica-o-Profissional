@@ -1,28 +1,32 @@
-1. Problema Escolhido
+ 1. Problema Escolhido
 
-No contexto do Future Skills Lab, criei um sistema que gerencia uma fila de trabalhadores que aguardam cursos de requalificação profissional.
+No contexto do Future Skills Lab, foi desenvolvido um sistema que gerencia uma fila de trabalhadores que aguardam cursos de requalificação profissional.
 
 Cada trabalhador possui:
+
 Nome
+
 Curso desejado
 
-O sistema deve permitir:
+O sistema permite:
+
 Inserir um trabalhador na fila
+
 Remover o primeiro trabalhador atendido
+
 Mostrar toda a fila
 
-Estrutura de dados utilizada: FILA implementada com lista encadeada.
+Estrutura de dados utilizada:
+➡️ Fila (Queue) implementada com lista encadeada (linked list).
 
-2. Prompt enviado para a IA
-
-"Crie em C um sistema usando FILA (queue) para gerenciar uma fila de trabalhadores que aguardam cursos de requalificação profissional. 
+ 2. Prompt enviado para a IA
+Crie em C um sistema usando FILA (queue) para gerenciar uma fila de trabalhadores que aguardam cursos de requalificação profissional. 
 Cada trabalhador deve ter nome e curso desejado. 
 Implemente funções: enqueue, dequeue e imprimirFila. 
 A fila deve usar alocação dinâmica (struct Node + ponteiros). 
-Retorne o código completo em C compilável."
+Retorne o código completo em C compilável.
 
 3. Código Gerado Pela IA
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -100,28 +104,48 @@ int main() {
     return 0;
 }
 
+ 4. Análise Crítica da Solução da IA
+ Correção
 
-4. Análise Crítica da Solução da IA
+A IA produziu um código funcional que:
 
-Correção
+Compilava corretamente
 
-.código compilava e funcionava.
-.nqueue, dequeue e printQueue funcionavam como esperado.
-.Estrutura de fila estava correta.
+Implementava as funções enqueue, dequeue e printQueue
 
-Problemas encontrados
+Utilizava nós encadeados para gerenciar a fila
 
-Não verificava se malloc() falhou  -----> Possível crash
-strcpy() inseguro  -----> Possível estouro de memória
-Não tinha função para destruir a fila -----> Vazamento de memória
-main() sem tratamento de saída -----> Limita aplicações reais
+ Problemas encontrados
+Problema	Impacto
+ Não verificava falha do malloc()	Pode causar crash
+Uso de strcpy() inseguro	Possível overflow
+ Falta de função para liberar memória	Vazamento de memória
+ main() simples e pouco robusto	Limita aplicações reais
+ 5. Melhorias Implementadas
 
-5. Melhorias implementadas
+As melhorias realizadas foram:
 
-Verificação de erro em malloc()
-Troca de strcpy por strncpy
-Remoção de acentos para compatibilidade com Windows
-Nova função destroyQueue
-Impressão formatada
-Saídas mais limpas e consistentes
+Verificação de falha em malloc()
 
+ Troca de strcpy() por strncpy() para maior segurança
+
+ Remoção de acentos para evitar problemas no Windows
+
+ Criação da função destroyQueue() para liberar memória
+
+Impressão formatada e mais legível
+
+ Separação do código em fila.h, fila.c e main.c
+
+ Código final mais limpo, seguro e organizado
+
+6. O que foi melhorado (Explicação)
+
+
+Problema encontrado	Correção aplicada
+malloc() sem verificação > Agora há checagem de erro e mensagem adequada
+Uso de strcpy() inseguro >  Substituído por strncpy() para evitar overflow
+Ausência de destrutor da fila > Criada a função destroyQueue()
+Vazamento de memória > Toda memória alocada é corretamente liberada
+Falta de robustez no main() > Adicionadas validações e estrutura mais clara
+Strings sem limite seguro > Uso de MAX e truncamento garantindo segurança
