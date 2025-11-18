@@ -1,32 +1,39 @@
- 1. Problema Escolhido
+# Sistema de Fila de Requalificação Profissional
 
-No contexto do Future Skills Lab, foi desenvolvido um sistema que gerencia uma fila de trabalhadores que aguardam cursos de requalificação profissional.
+## Objetivo
 
-Cada trabalhador possui:
+Aplicação em linguagem C para gerenciar uma **fila de trabalhadores** que aguardam cursos de requalificação profissional no contexto do *Future Skills Lab*, utilizando conceitos de estruturas de dados e análise de código gerado por IA.
 
-Nome
+---
 
-Curso desejado
+## Funcionalidades
 
-O sistema permite:
+- Inserção de trabalhadores na fila 
+- Remoção do primeiro trabalhador 
+- Exibição completa da fila com formatação  
+- Modularização em `fila.h`, `fila.c` e `main.c`  
+- Tratamento de falhas de alocação de memória  
+- Prevenção de estouro de memória com `strncpy`  
+- Liberação completa da memória da fila (`destroyQueue`)  
+- Refinamento de código originalmente gerado por IA  
 
-Inserir um trabalhador na fila
+---
 
-Remover o primeiro trabalhador atendido
+## Prompt Utilizado
 
-Mostrar toda a fila
-
-Estrutura de dados utilizada:
-➡️ Fila (Queue) implementada com lista encadeada (linked list).
-
- 2. Prompt enviado para a IA
+```
 Crie em C um sistema usando FILA (queue) para gerenciar uma fila de trabalhadores que aguardam cursos de requalificação profissional. 
 Cada trabalhador deve ter nome e curso desejado. 
 Implemente funções: enqueue, dequeue e imprimirFila. 
 A fila deve usar alocação dinâmica (struct Node + ponteiros). 
 Retorne o código completo em C compilável.
+```
 
-3. Código Gerado Pela IA
+---
+
+## Código Gerado Pela IA
+
+```c
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -103,49 +110,56 @@ int main() {
 
     return 0;
 }
+```
 
- 4. Análise Crítica da Solução da IA
- Correção
+---
+
+## Análise Crítica da Solução da IA
+
+### Correção
 
 A IA produziu um código funcional que:
 
-Compilava corretamente
+- Compilava corretamente  
+- Implementava as funções `enqueue`, `dequeue` e `printQueue`  
+- Utilizava nós encadeados para gerenciar a fila  
 
-Implementava as funções enqueue, dequeue e printQueue
+### Problemas Encontrados
 
-Utilizava nós encadeados para gerenciar a fila
+| Problema                                   | Impacto                |
+|-------------------------------------------|------------------------|
+| Não verificava falha do `malloc()`        | Pode causar crash      |
+| Uso de `strcpy()` inseguro                | Possível overflow      |
+| Não havia função para liberar a fila      | Vazamento de memória   |
+| `main()` simples e pouco robusto          | Limita aplicações reais|
 
- Problemas encontrados
-Problema	Impacto
- Não verificava falha do malloc()	Pode causar crash
-Uso de strcpy() inseguro	Possível overflow
- Falta de função para liberar memória	Vazamento de memória
- main() simples e pouco robusto	Limita aplicações reais
- 5. Melhorias Implementadas
+---
+
+## Melhorias Implementadas
 
 As melhorias realizadas foram:
 
-Verificação de falha em malloc()
+- Verificação de falha em `malloc()` com mensagem de erro  
+- Troca de `strcpy()` por `strncpy()` para maior segurança  
+- Remoção de acentos no código para evitar problemas no Windows  
+- Criação da função `destroyQueue()` para liberar memória  
+- Impressão formatada e mais legível da fila  
+- Separação do código em `fila.h`, `fila.c` e `main.c`  
+- Código final mais limpo, seguro e organizado  
 
- Troca de strcpy() por strncpy() para maior segurança
+---
 
- Remoção de acentos para evitar problemas no Windows
+## O que foi melhorado
 
- Criação da função destroyQueue() para liberar memória
+```
 
-Impressão formatada e mais legível
+Problema encontrado	                Correção aplicada
+malloc() sem verificação	        Agora há checagem de erro e mensagem adequada
+Uso de strcpy() inseguro	        Substituído por strncpy() para evitar overflow
+Ausência de destrutor da fila	    Criada a função destroyQueue()
+Vazamento de memória	            Toda memória alocada é corretamente liberada
+Falta de robustez no main()	        Adicionadas validações e estrutura mais clara
+Strings sem limite seguro	        Uso de MAX e truncamento garantindo segurança
 
- Separação do código em fila.h, fila.c e main.c
+```
 
- Código final mais limpo, seguro e organizado
-
-6. O que foi melhorado (Explicação)
-
-
-Problema encontrado	Correção aplicada
-malloc() sem verificação > Agora há checagem de erro e mensagem adequada
-Uso de strcpy() inseguro >  Substituído por strncpy() para evitar overflow
-Ausência de destrutor da fila > Criada a função destroyQueue()
-Vazamento de memória > Toda memória alocada é corretamente liberada
-Falta de robustez no main() > Adicionadas validações e estrutura mais clara
-Strings sem limite seguro > Uso de MAX e truncamento garantindo segurança
